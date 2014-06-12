@@ -1,0 +1,29 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<parent>
+		<groupId>org.dwasinge</groupId>
+		<artifactId>my-fuse-examples</artifactId>
+		<version>1.0.0-SNAPSHOT</version>
+	</parent>
+
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>osgi-simple-service-api</artifactId>
+	<packaging>bundle</packaging>
+
+	<name>My Fuse Examples :: OSGi Simple Service - API</name>
+	<description>Simple OSGi service API.</description>
+
+	<properties>
+		<osgi-import-pkg>
+			!org.dwasinge,
+			*
+		</osgi-import-pkg>
+		<osgi-export-pkg>
+			org.dwasinge*
+		</osgi-export-pkg>
+		<osgi-private-pkg>
+		</osgi-private-pkg>
+	</properties>
+
+</project>
