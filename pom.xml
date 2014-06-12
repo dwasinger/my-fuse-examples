@@ -156,7 +156,7 @@
 		<repository>
 			<id>fabric-maven-proxy</id>
 			<name>FMC Maven Proxy</name>
-			<url>http://admin:8GhTDKgIrZ3T@fuse2-dwasinge.rhcloud.com/maven/upload/</url>
+			<url>http://fuse2-dwasinge.rhcloud.com/maven/upload/</url>
 		</repository>
 	</distributionManagement>
 
