@@ -11,8 +11,8 @@
 	<artifactId>osgi-simple-service</artifactId>
 	<packaging>bundle</packaging>
 
-	<name>My Fuse Examples :: OSGi Simple Service - API</name>
-	<description>Simple OSGi service API.</description>
+	<name>My Fuse Examples :: OSGi Simple Service</name>
+	<description>Simple OSGi service implementation.</description>
 
 	<properties>
 		<osgi-import-pkg>

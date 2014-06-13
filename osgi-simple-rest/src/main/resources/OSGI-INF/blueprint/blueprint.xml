@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:cm="http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.0.0"
+	xmlns:camel="http://camel.apache.org/schema/blueprint" xmlns:http="http://cxf.apache.org/transports/http/configuration"
+	xmlns:camel-cxf="http://camel.apache.org/schema/blueprint/cxf"
+	xsi:schemaLocation="
+		http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.0.0 http://aries.apache.org/schemas/blueprint-cm/blueprint-cm-1.0.0.xsd
+		http://www.osgi.org/xmlns/blueprint/v1.0.0 http://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd
+		http://camel.apache.org/schema/blueprint http://camel.apache.org/schema/blueprint/camel-blueprint.xsd
+		http://cxf.apache.org/transports/http/configuration http://cxf.apache.org/schemas/configuration/http-conf.xsd
+		http://camel.apache.org/schema/blueprint/cxf http://camel.apache.org/schema/blueprint/cxf/camel-cxf.xsd ">
+
+
+	<cm:property-placeholder persistent-id="org.dwasinge.api" />
+
+	<!-- Create a json provider bean via custom Provider Factory Factory can 
+		set specific provider implementation and configuration. -->
+	<bean id="jsonProvider" factory-method="createProvider"
+		class="org.dwasinge.provider.JacksonJsonProviderFactory" />
+
+
+	<!-- CXFRS Server Config This is a workaround to create a server manually 
+		and configure the providers. Replace with standard camel cfxrs server after 
+		upgrade of camel higher than 2.10.4/2.10.0-redhat-60024 Here we configure 
+		a bean as a jaxrs server. In the rest routes we will use this bean as the 
+		endpoint -->
+<!-- 	<bean id="restServer" -->
+<!-- 		class="org.apache.camel.component.cxf.blueprint.RsServerBlueprintBean"> -->
+<!-- 		<property name="address" -->
+<!-- 			value="http://${org.dwasinge.api.http.address}:${org.dwasinge.api.http.port}/${org.dwasinge.api.path}/${org.dwasinge.api.version}/" /> -->
+<!-- 		<property name="resourceClasses"> -->
+<!-- 			<list> -->
+<!-- 				<value>org.dwasinge.simple.resource.SimpleResource</value> -->
+<!-- 			</list> -->
+<!-- 		</property> -->
+<!-- 		<property name="providers"> -->
+<!-- 			<list> -->
+<!-- 				<ref component-id="jsonProvider" /> -->
+<!-- 			</list> -->
+<!-- 		</property> -->
+<!-- 	</bean> -->
+
+	<bean id="simpleBean" class="org.dwasinge.simple.resource.SimpleResource"/>
+
+	<!-- Defined the server endpoint to create the cxf-rs consumer -->
+	<camel-cxf:rsServer id="restServer"
+		address="http://${org.dwasinge.api.http.address}:${org.dwasinge.api.http.port}/${org.dwasinge.api.path}/${org.dwasinge.api.version}/">
+		<camel-cxf:serviceBeans>
+			<ref component-id="simpleBean" />
+		</camel-cxf:serviceBeans>
+		<camel-cxf:providers>
+			<bean class="org.codehaus.jackson.jaxrs.JacksonJsonProvider" />
+		</camel-cxf:providers>
+	</camel-cxf:rsServer>
+
+
+	<camelContext id="blueprintContext" trace="true"
+		xmlns="http://camel.apache.org/schema/blueprint">
+		<camel:package>org.dwasinge.simple.route</camel:package>
+	</camelContext>
+
+</blueprint>

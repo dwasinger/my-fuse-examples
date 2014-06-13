@@ -19,6 +19,9 @@
 		<!-- Camel Properties -->
 		<camel.version>2.12.3</camel.version>
 
+		<!-- CXF Properties -->
+		<cxf.version>2.7.0.redhat-610379</cxf.version> 
+
 		<!-- BRMS Properties -->
 <!-- 		<brms.version>6.0.2-redhat-5</brms.version> -->
 
@@ -42,6 +45,9 @@
 		<!-- Java Version -->
 		<compiler.source>1.7</compiler.source>
 		<compiler.target>1.7</compiler.target>
+
+		<!-- Jackson Properties -->
+		<jackson-jaxrs.version>1.9.10</jackson-jaxrs.version>
 
 	</properties>
 
@@ -150,13 +156,14 @@
 	<modules>
 		<module>osgi-simple-service-api</module>
 		<module>osgi-simple-service</module>
+		<module>osgi-simple-rest</module>
 	</modules>
 
 	<distributionManagement>
 		<repository>
 			<id>fabric-maven-proxy</id>
 			<name>FMC Maven Proxy</name>
-			<url>http://fuse2-dwasinge.rhcloud.com/maven/upload/</url>
+			<url>http://fuseroot-dwasinge.rhcloud.com/maven/upload/</url>
 		</repository>
 	</distributionManagement>
 
